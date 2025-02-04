@@ -3,12 +3,31 @@
 import Link from "next/link"
 import { Button } from "./ui/button"
 import Image from "next/image"
-import { useRef } from "react"
+import { useRef, useEffect } from "react"
 
 export const HeroSection = () => {
-  const imageRef = useRef(null)
+  const imageRef = useRef<HTMLImageElement | null>(null)
 
-  
+  useEffect(() => {
+    const imageElement = imageRef.current
+
+    if (!imageElement) return // ✅ Ensure the ref exists before proceeding
+
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY
+      const scrollThreshold = 100
+
+      if (scrollPosition > scrollThreshold) {
+        imageElement.classList.add("scrolled")
+      } else {
+        imageElement.classList.remove("scrolled")
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
   return (
     <section className="w-full pt-36 md:pt-48 pb-10">
       <div className="space-y-6 text-center">
