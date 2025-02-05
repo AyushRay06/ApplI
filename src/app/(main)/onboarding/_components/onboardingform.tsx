@@ -3,3 +3,4 @@ const OnboardingForm = ({ industries }) => {
 }
 
 export default OnboardingForm
+
