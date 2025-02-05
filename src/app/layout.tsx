@@ -4,6 +4,7 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import Header from "@/components/header"
 import { ClerkProvider } from "@clerk/nextjs"
+import { Toaster } from "@/components/ui/sonner"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,7 +40,7 @@ export default function RootLayout({
           >
             <Header />
             <main className="min-h-screen">{children}</main>
-            {/* <Toaster richcolors/> */}
+            <Toaster richColors />
             <footer className="bg-muted/50 py-12">
               <div className="container mx-auto px-4 text-center text-gray-200">
                 <p>Made for actual use case by Ayush.</p>
