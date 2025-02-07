@@ -56,7 +56,7 @@ export async function getIndustryInsights() {
   })
 
   if (!user) throw new Error("User not found")
-    //
+  //
   if (!user.industry) throw new Error("User industry is missing")
 
   if (!user.industryInsight) {
@@ -64,12 +64,14 @@ export async function getIndustryInsights() {
     //eg: user is Ayush and his industy is Tech, so insights related to tech
     const insights = await generateAIInsights(user.industry)
 
-    const result = await prisma.industryInsight.create({
+    const industryInsight = await prisma.industryInsight.create({
       data: {
         industry: user.industry,
         ...insights,
         nextUpdate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
       },
     })
+    return industryInsight
   }
+  return user.industryInsight
 }
